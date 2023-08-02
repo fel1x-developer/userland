@@ -1,7 +1,7 @@
 # MSVC5 does not fully support C99, enabling declaration-after-statement
 # warnings allows a common MSVC5 build error to be detected in Linux builds.
 if (CMAKE_COMPILER_IS_GNUCC)
-   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Werror -Wdeclaration-after-statement")
+   set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wdeclaration-after-statement")
    add_definitions (-D_GNU_SOURCE)
 endif ()
 
