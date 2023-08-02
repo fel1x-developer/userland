@@ -1,7 +1,7 @@
 
 # raspistill/raspivid/raspiyuv
 
-SET(COMPILE_DEFINITIONS -Werror)
+SET(COMPILE_DEFINITIONS)
 
 # Set --no-as-needed to stop the linker discarding mmal_vc_client
 # as it can't see that the constructor registers a load of functionality
