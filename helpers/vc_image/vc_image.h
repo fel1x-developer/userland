@@ -492,6 +492,9 @@ extern "C" {
                            , unsigned char *datav, int realwidth, int realheight
                            , unsigned short *buffer, int screenwidth, int screenheight);
 
+   void vc_image_convert_rgb2yuv(unsigned short *rgb, unsigned char *Y, unsigned char *U, unsigned char *V,
+                           int rgb_pitch_pixels, int y_pitch_bytes, int width_pixels, int height);
+
    /* Frees up (using free_256bit) the source bytes and vc_image header */
    void vc_image_free(VC_IMAGE_T *img);
 
