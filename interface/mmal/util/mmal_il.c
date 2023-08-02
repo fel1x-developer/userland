@@ -647,10 +647,10 @@ static struct {
    {MMAL_ENCODING_MP2V,           OMX_VIDEO_CodingMPEG2},
    {MMAL_ENCODING_MP1V,           OMX_VIDEO_CodingMPEG2},
    {MMAL_ENCODING_H263,           OMX_VIDEO_CodingH263},
-   {MMAL_ENCODING_WVC1,           OMX_VIDEO_CodingWMV},
    {MMAL_ENCODING_WMV3,           OMX_VIDEO_CodingWMV},
    {MMAL_ENCODING_WMV2,           OMX_VIDEO_CodingWMV},
    {MMAL_ENCODING_WMV1,           OMX_VIDEO_CodingWMV},
+   {MMAL_ENCODING_WVC1,           OMX_VIDEO_CodingWMV},
    {MMAL_ENCODING_VP6,            OMX_VIDEO_CodingVP6},
    {MMAL_ENCODING_VP7,            OMX_VIDEO_CodingVP7},
    {MMAL_ENCODING_VP8,            OMX_VIDEO_CodingVP8},
@@ -760,9 +760,6 @@ static struct {
    {MMAL_ENCODING_BAYER_SGBRG8,   OMX_COLOR_FormatRawBayer8bit},
    {MMAL_ENCODING_BAYER_SRGGB8,   OMX_COLOR_FormatRawBayer8bit},
    {MMAL_ENCODING_BAYER_SBGGR10P, OMX_COLOR_FormatRawBayer10bit},
-   {MMAL_ENCODING_BAYER_SGRBG10P, OMX_COLOR_FormatRawBayer10bit},
-   {MMAL_ENCODING_BAYER_SGBRG10P, OMX_COLOR_FormatRawBayer10bit},
-   {MMAL_ENCODING_BAYER_SRGGB10P, OMX_COLOR_FormatRawBayer10bit},
    {MMAL_ENCODING_BAYER_SBGGR12P, OMX_COLOR_FormatRawBayer12bit},
    {MMAL_ENCODING_BAYER_SGRBG12P, OMX_COLOR_FormatRawBayer12bit},
    {MMAL_ENCODING_BAYER_SGBRG12P, OMX_COLOR_FormatRawBayer12bit},
@@ -824,71 +821,6 @@ OMX_COLOR_FORMATTYPE mmalil_encoding_to_omx_color_format(uint32_t encoding)
    return mmal_omx_colorformat_coding_table[i].coding;
 }
 
-static struct {
-   uint32_t encoding;
-   OMX_COLOR_FORMATTYPE color_format;
-   OMX_BAYERORDERTYPE bayer_order;
-} mmal_omx_bayer_order_coding_table[] =
-{
-   //Colour format required for conversion from OMX to MMAL.
-   //Not used for MMAL encoding to OMX color format.
-   {MMAL_ENCODING_BAYER_SBGGR8, OMX_COLOR_FormatRawBayer8bit, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGBRG8, OMX_COLOR_FormatRawBayer8bit, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SGRBG8, OMX_COLOR_FormatRawBayer8bit, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SRGGB8, OMX_COLOR_FormatRawBayer8bit, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR10P, OMX_COLOR_FormatRawBayer10bit, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG10P, OMX_COLOR_FormatRawBayer10bit, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG10P, OMX_COLOR_FormatRawBayer10bit, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB10P, OMX_COLOR_FormatRawBayer10bit, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR12P, OMX_COLOR_FormatRawBayer12bit, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG12P, OMX_COLOR_FormatRawBayer12bit, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG12P, OMX_COLOR_FormatRawBayer12bit, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB12P, OMX_COLOR_FormatRawBayer12bit, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR14P, OMX_COLOR_FormatRawBayer14bit, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG14P, OMX_COLOR_FormatRawBayer14bit, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG14P, OMX_COLOR_FormatRawBayer14bit, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB14P, OMX_COLOR_FormatRawBayer14bit, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR16,  OMX_COLOR_FormatRawBayer16bit, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG16,  OMX_COLOR_FormatRawBayer16bit, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG16,  OMX_COLOR_FormatRawBayer16bit, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB16,  OMX_COLOR_FormatRawBayer16bit, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR10DPCM8,OMX_COLOR_FormatRawBayer8bitcompressed, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG10DPCM8,OMX_COLOR_FormatRawBayer8bitcompressed, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG10DPCM8,OMX_COLOR_FormatRawBayer8bitcompressed, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB10DPCM8,OMX_COLOR_FormatRawBayer8bitcompressed, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR10, OMX_COLOR_FormatRawBayer10bit16bpp, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG10, OMX_COLOR_FormatRawBayer10bit16bpp, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG10, OMX_COLOR_FormatRawBayer10bit16bpp, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB10, OMX_COLOR_FormatRawBayer10bit16bpp, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR12, OMX_COLOR_FormatRawBayer12bit16bpp, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG12, OMX_COLOR_FormatRawBayer12bit16bpp, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG12, OMX_COLOR_FormatRawBayer12bit16bpp, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB12, OMX_COLOR_FormatRawBayer12bit16bpp, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_BAYER_SBGGR14, OMX_COLOR_FormatRawBayer14bit16bpp, OMX_BayerOrderBGGR},
-   {MMAL_ENCODING_BAYER_SGRBG14, OMX_COLOR_FormatRawBayer14bit16bpp, OMX_BayerOrderGRBG},
-   {MMAL_ENCODING_BAYER_SGBRG14, OMX_COLOR_FormatRawBayer14bit16bpp, OMX_BayerOrderGBRG},
-   {MMAL_ENCODING_BAYER_SRGGB14, OMX_COLOR_FormatRawBayer14bit16bpp, OMX_BayerOrderRGGB},
-
-   {MMAL_ENCODING_UNKNOWN,        OMX_COLOR_FormatMax,            OMX_BayerOrderMax}
-};
-
-uint32_t mmalil_omx_bayer_format_order_to_encoding(OMX_BAYERORDERTYPE bayer_order, OMX_COLOR_FORMATTYPE color_format)
-{
-   unsigned int i;
-   for(i = 0; mmal_omx_bayer_order_coding_table[i].encoding != MMAL_ENCODING_UNKNOWN; i++)
-      if(mmal_omx_bayer_order_coding_table[i].bayer_order == bayer_order &&
-         mmal_omx_bayer_order_coding_table[i].color_format == color_format)
-         break;
-   return mmal_omx_bayer_order_coding_table[i].encoding;
-}
 
 OMX_BAYERORDERTYPE mmalil_encoding_to_omx_bayer_order(uint32_t encoding)
 {
