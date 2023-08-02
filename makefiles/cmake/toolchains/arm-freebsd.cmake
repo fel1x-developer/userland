@@ -9,8 +9,8 @@ SET(CMAKE_CXX_COMPILER c++)
 SET(CMAKE_ASM_COMPILER as)
 SET(CMAKE_SYSTEM_PROCESSOR arm)
 
-#ADD_DEFINITIONS("-march=aarch64")
-add_definitions(" -mfpu=vfp")
+#ADD_DEFINITIONS("-march=armv6")
+add_definitions("-mcpu=arm1176jzf-s -mfpu=vfp")
 add_definitions("-DVCOS_DEFAULT_STACK_SIZE=16384")
 
 # rdynamic means the backtrace should work
