@@ -51,9 +51,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // We use some GNU extensions (basename)
 #ifndef _GNU_SOURCE
-#define _GNU_SOURCE
 #endif
-
+#include <libgen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -568,7 +567,7 @@ static void application_help_message(char *app_name)
  * @param state Pointer to state structure to assign any discovered parameters to
  * @return Non-0 if failed for some reason, 0 otherwise
  */
-static int parse_cmdline(int argc, const char **argv, RASPIVID_STATE *state)
+static int parse_cmdline(int argc, char **argv, RASPIVID_STATE *state)
 {
    // Parse the command line arguments.
    // We are looking for --<something> or -<abbreviation of something>
@@ -2391,7 +2390,7 @@ static int wait_for_next_change(RASPIVID_STATE *state)
 /**
  * main
  */
-int main(int argc, const char **argv)
+int main(int argc, char **argv)
 {
    // Our main data storage vessel..
    RASPIVID_STATE state;
